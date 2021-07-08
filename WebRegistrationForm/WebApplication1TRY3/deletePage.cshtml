@@ -1,0 +1,47 @@
+﻿@{
+    var db = Database.Open("deletePage");
+    var selectQueryString = "SELECT * FROM Customers ORDER BY name";
+}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Delete Customer</title>
+    <style>
+        table, th, td {
+            border: solid 1px #bbbbbb;
+            border-collapse: collapse;
+            padding: 2px;
+        }
+    </style>
+
+</head>
+<body>
+    <h1>Delete Customer</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th> </th>
+                <th>Name</th>
+                <th>id</th>
+                <th>group name</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var row in db.Query(selectQueryString))
+            {
+                <tr>
+                    <td><a href="@Href("~/DeleteCustomer", row.Id)">Delete</a></td>
+                    <td>@row.name</td>
+                    <td>@row.id</td>
+                    <td>@row.groupname</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</body>
+</html>
